@@ -23,15 +23,9 @@ const validationSchema = yup.object({
   last_name: yup
     .string('Enter your Last name')
     .required('Last name is required'),
-  phone_number: yup
-    .string('Enter your Phone number')
-    .required('Phone number is required'),
-  location: yup
-    .string('Enter your Location')
-    .required('Location is required'),
-  cv: yup
-    .string('Upload your resume')
-    .required('Resume is required'),
+  photo: yup
+    .string('Upload your photo')
+    .required('Photo is required'),
 });
 
 function Form() {
@@ -43,16 +37,14 @@ function Form() {
     initialValues: {
       first_name: '',
       last_name:'',
-      phone_number:'',
-      location:'',
       email:'',
-      cv: null
+      photo: null
     },
     validationSchema: validationSchema,
     onSubmit: async (values, {resetForm}) => {
       console.log(values);
       try {
-        const response = await axios.post('http://127.0.0.1:8000/api/resume/store', values, {
+        const response = await axios.post('http://127.0.0.1:8000/api/detail/store', values, {
           headers: {
             'Content-Type': 'multipart/form-data',
           }
@@ -82,7 +74,7 @@ function Form() {
 
   const onDrop = useCallback(acceptedFiles => {
     console.log(acceptedFiles[0])
-    formik.setFieldValue('cv', acceptedFiles[0]);
+    formik.setFieldValue('photo', acceptedFiles[0]);
   }, [formik])
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 

@@ -11,6 +11,7 @@ import Box from '@mui/material/Box';
 import axios from 'axios';
 import {useDropzone} from 'react-dropzone'
 import './Verify.css'
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = yup.object({
   email: yup
@@ -22,16 +23,7 @@ const validationSchema = yup.object({
     .required('First name is required'),
   last_name: yup
     .string('Enter your Last name')
-    .required('Last name is required'),
-  phone_number: yup
-    .string('Enter your Phone number')
-    .required('Phone number is required'),
-  location: yup
-    .string('Enter your Location')
-    .required('Location is required'),
-  cv: yup
-    .string('Upload your resume')
-    .required('Resume is required'),
+    .required('Last name is required')
 });
 
 function Verify() {
@@ -39,20 +31,19 @@ function Verify() {
   const [failMessage, setFailMessage] = useState('');
   const [open, setOpen] = React.useState(false);
 
+  const history = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       first_name: '',
       last_name:'',
-      phone_number:'',
-      location:'',
       email:'',
-      cv: null
     },
     validationSchema: validationSchema,
     onSubmit: async (values, {resetForm}) => {
       console.log(values);
       try {
-        const response = await axios.post('http://127.0.0.1:8000/api/resume/store', values, {
+        const response = await axios.post('http://127.0.0.1:8000/api/detail/verify', values, {
           headers: {
             'Content-Type': 'multipart/form-data',
           }
@@ -71,6 +62,7 @@ function Verify() {
     setTimeout(() => {
       setFailMessage('');
     }, 5000);
+    // history.push('/result/500');
   }
 
   const handleUploadSuccess = () => {
@@ -78,6 +70,7 @@ function Verify() {
     setTimeout(() => {
       setSuccessMessage('');
     }, 5000);
+    history('/result/200');
   };
 
   const onDrop = useCallback(acceptedFiles => {
