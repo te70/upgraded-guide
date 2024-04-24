@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 
 import './Result.css'
 import { useParams } from 'react-router-dom';
-
+import {motion} from 'framer-motion'
 
 
 function Result() {
@@ -34,9 +34,15 @@ function Result() {
               <CardContent>
               <div>
                 {status === '200' ? (
-                    <p>Upload Successful</p>
+                  <div>
+                     <p>Taken</p>
+                      <img src="./red.jpg" alt=""/>
+                  </div>
                 ) : (
-                    <p>Upload Failed</p>
+                  <div>
+                    <p>Feel free to explore</p>
+                      <img src="./green.jpg" alt=""/>
+                  </div>
                 )}
                 </div>
             </CardContent>
@@ -45,6 +51,7 @@ function Result() {
         </div>
       </div>
     </section>
+ 
     </div>
   )
 }

@@ -30,6 +30,7 @@ function Verify() {
   const [successMessage, setSuccessMessage] = useState('');
   const [failMessage, setFailMessage] = useState('');
   const [open, setOpen] = React.useState(false);
+  const [response, setResponse] = useState(null);
 
   const history = useNavigate();
 
@@ -50,6 +51,15 @@ function Verify() {
         });
         handleUploadSuccess();
         resetForm();
+        setResponse(response);
+        console.log(response);
+        if (response.data == '200') {
+          // Navigate to success page
+          history('/result/200');
+        } else {
+          // Navigate to error page
+          history('/result/500');
+        }
       } catch(error) {
         console.log(error);
         handleFailMessage();
@@ -58,15 +68,15 @@ function Verify() {
   });
 
   const handleFailMessage = () => {
-    setFailMessage('Failed to upload');
+    // setFailMessage('Failed to upload');
     setTimeout(() => {
       setFailMessage('');
     }, 5000);
-    // history.push('/result/500');
+    history('/result/500');
   }
 
   const handleUploadSuccess = () => {
-    setSuccessMessage('Uploaded successfully');
+    // setSuccessMessage('Uploaded successfully');
     setTimeout(() => {
       setSuccessMessage('');
     }, 5000);
@@ -160,6 +170,7 @@ function Verify() {
         </div>
       </div>
     </section>
+   
     </div>
   )
 }

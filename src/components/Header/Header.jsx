@@ -23,7 +23,7 @@ function Header() {
             <div className="flexCenter h-menu" style={getMenuStyles(menuOpened)}>
                 <a href="/form">Upload details</a>
                 <a href="/verify">Verify</a>
-                <a href="#contact">Contact</a>
+                <span className='secondaryText'>TkBuild</span>
             </div>
             </OutsideClickHandler>
             <div className="menu-icon"onClick={()=>setMenuOpened((prev)=>!prev)}>

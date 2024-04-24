@@ -11,7 +11,6 @@ function Plus() {
           <Header/>
           <Hero/>
         </div>
-        {/* <Footer/> */}
     </div>
   )
 }
